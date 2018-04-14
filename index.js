@@ -44,7 +44,7 @@ if (env == "prod") {
 	client.connect(1337, "192.168.1.184", function() {
 	console.log("connected to lamp")
 	})
-	
+	server.listen(3000)
 	client.on("data", function(data) {
 		var str = data.toString()
 		camera.start()
@@ -78,6 +78,10 @@ if (env == "prod") {
 	
 		})	
 	})
+} else {
+	app.listen(3000, () => console.log("listning on port 3000"))
 }
-app.listen(3000, () => console.log("listning on port 3000"))
+
+
+
 
