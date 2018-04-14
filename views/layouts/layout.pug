@@ -12,32 +12,63 @@ html
 			script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js", integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ", crossorigin="anonymous")
 			script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js", integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm", crossorigin="anonymous")
 
-	body
+	body(style="background-color:#F9FCF1;")
 		block nav
 			nav(class="navbar navbar-expand-md navbar-dark bg-dark navbar-fixed-top")
 				a(class="navbar-brand", href="#") Supernovis
 				button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expended="false", aria-label="Toggle navigation")
 					span(class="navbar-toggler-icon")
 				div(class="collapse navbar-collapse", id="navbarNav")
-					div(class="navbar-nav")
+					div(class="navbar-nav mr-auto")
 						a(class="nav-item nav-link", href="/") Home
 						a(class="nav-item nav-link", href="/about") About
+						a(class="nav-item nav-link", href="/blog") Blog
 						div(class="navbar-item dropdown")
 							a(class="nav-link dropdown-toggle", href="#", id="navbardrop", data-toggle="dropdown", aria-haspopup="true", aria-expended="false") Projects
 							div(class="dropdown-menu", aria-labelledby="navbardrop")
 								a(class="dropdown-item", href="/projects/lamp") Lamp
 								a(class="dropdown-item", href="/projects/selfbalancingrobot") Self-balancing robot
 								a(class="dropdown-item", href="/projects/website") This website
-		div(class="row")
+								a(class="dropdown-item", href="/projects/predictelection") predict the election in sweden 2018
+					div(class="navbar-nav")
+						a(class="navbar-brand m1-md-auto", href="https://github.com/supernovan")
+							img(src="../images/github.png", width="30", height="30")
+						
+			
+					
+
+		div(class="container-fluid")
+			div(class="row")
+				img(src="../images/header.jpg", class="img-fluid" style="min-width: 100%; height: auto; max-height: 230px;")
+
+		div(class="row", style="background: linear-gradient(to bottom, #72a353, #F9FCF1); height: 43px;")
+
+		div(class="row", style="background-color: F9FCF1;")
 
 
 			div(class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-2")
 				div(class="card bg-light border-0 mb-3")
-					div(class="card-body")
+					div(class="card-body", style="background-color: #F9FCF1;")
 						img(class="card-img-top", src="../images/logo.jpg")
 						h3 Herro
 						p Welcome to Supernovis, my name is Mattias Josefsson. I am an engineering student in engineering mathematics at Lund university, Sweden. This is my website, that rarely gets updated. Hopefully in time, it will become an okay website.
-			div(class="col-sm-7 col-md-8 col-lg-9 col-xl-10")
+			div(class="col-sm-7 col-md-8 col-lg-9 col-xl-10", style="background-color: F9FCF1;")
 				block content
 
 		block foot
+			div
+				footer(class="bg-dark text-dark mt-4")
+					div(style="background: linear-gradient(to bottom, #F9FCF1, #81847f);")
+						div(class="container-fluid py-3")
+							div(class="row")
+								div(class="col-md-3")
+									blockquote(class="blockquote")
+										p(class="mb-0") Or perhaps he's wondering why someone would shoot a man before throwing him out of a plane
+										footer(class="blockquote-footer") Bane
+										cite(title="Source Title") The Dark Night Rises
+									
+								div(class="col-md-3")
+								div(class="col-md-3")
+								div(class="col-md-3")
+							div(class="row")
+

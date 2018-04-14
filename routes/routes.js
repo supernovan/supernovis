@@ -20,6 +20,16 @@ router.get("/projects/website", function(req, res) {
 	res.render("website")
 })
 
+router.get("/projects/predictelection", function(req, res) {
+	res.render("predictelection")
+})
+
+router.get("/blog", function(req, res) {
+	res.render("blog")
+})
+
+
+
 module.exports = router
 
 
