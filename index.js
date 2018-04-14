@@ -7,7 +7,9 @@ const routes = require("./routes/routes.js")
 
 
 app.use("/", routes)
-var env = process.env.NODE_ENV || "dev"
+
+env = require("./config/env.js")
+
 console.log(env)
 if (env == "prod") {
 	var net = require("net")
