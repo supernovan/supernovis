@@ -20,13 +20,24 @@ html
 					span(class="navbar-toggler-icon")
 				div(class="collapse navbar-collapse", id="navbarNav")
 					div(class="navbar-nav")
-						a(class="nav-item nav-link", href="#") Home
-						a(class="nav-item nav-link", href="#") About
+						a(class="nav-item nav-link", href="/") Home
+						a(class="nav-item nav-link", href="/about") About
 						div(class="navbar-item dropdown")
 							a(class="nav-link dropdown-toggle", href="#", id="navbardrop", data-toggle="dropdown", aria-haspopup="true", aria-expended="false") Projects
 							div(class="dropdown-menu", aria-labelledby="navbardrop")
-								a(class="dropdown-item", href="#") Lamp
-								a(class="dropdown-item", href="#") Self-balancing robot
-								a(class="dropdown-item", href="#") This website
-		block content
+								a(class="dropdown-item", href="/projects/lamp") Lamp
+								a(class="dropdown-item", href="/projects/selfbalancingrobot") Self-balancing robot
+								a(class="dropdown-item", href="/projects/website") This website
+		div(class="row")
+
+
+			div(class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-2")
+				div(class="card bg-light border-0 mb-3")
+					div(class="card-body")
+						img(class="card-img-top", src="../images/logo.jpg")
+						h3 Herro
+						p Welcome to Supernovis, my name is Mattias Josefsson. I am an engineering student in engineering mathematics at Lund university, Sweden. This is my website, that rarely gets updated. Hopefully in time, it will become an okay website.
+			div(class="col-sm-7 col-md-8 col-lg-9 col-xl-10")
+				block content
+
 		block foot
