@@ -31,10 +31,15 @@ html
 								a(class="dropdown-item", href="/projects/website") This website
 								a(class="dropdown-item", href="/projects/predictelection") predict the election in sweden 2018
 					div(class="navbar-nav")
+						if role === "admin"
+							a(class="nav-item nav-link", href="/logout") Logout
+						else 
+							a(class="nav-item nav-link", href="/login") Login
+						a(class="nav-item nav-link", href="/register") Register
 						a(class="navbar-brand m1-md-auto", href="https://github.com/supernovan")
 							img(src="../images/github.png", width="30", height="30")
 						
-			
+						
 					
 
 		div(class="container-fluid")
@@ -65,7 +70,7 @@ html
 									blockquote(class="blockquote")
 										p(class="mb-0") Or perhaps he's wondering why someone would shoot a man before throwing him out of a plane
 										footer(class="blockquote-footer") Bane
-										cite(title="Source Title") The Dark Night Rises
+										cite(title="Source Title") The Dark Knight Rises
 									
 								div(class="col-md-3")
 								div(class="col-md-3")
