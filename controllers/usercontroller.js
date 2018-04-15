@@ -29,7 +29,8 @@ exports.login = function (req, res, next) {
 	}
 }
 
-exports.reg = function (req, res, next) {
+//Might come back... someday
+/*exports.reg = function (req, res, next) {
 	if (req.body.user && req.body.pass) {
 		var admin = {
 			username: req.body.user,
@@ -45,7 +46,7 @@ exports.reg = function (req, res, next) {
 			}
 		})
 	}
-}
+}*/
 
 exports.logout = function (req, res, next) {
 	req.session.destroy()

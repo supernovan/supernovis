@@ -4,27 +4,26 @@ block content
 	div(class="container")
 		div(class="page-header")
 			h1 This is my blog
-		p It is not working yet, or rather I have not made the backend yet.
 
 		each post in blogposts
-			li
-				div(class="page-header")
-					h3 #{post.header}
+			
+			div(class="page-header")
+				h3 #{post.header}
 
-				p #{post.text}
-				p #{post.created}
-				if role === "admin"
-					form(action="api/updateBlogpost", method="post")
-						div(class="form-group")
-							button(type="submit", class="btn btn-info", name="date", value="#{post.created}") Update post
+			p #{post.text}
+			p #{post.created}
+			if role === "admin"
+				form(action="api/updateBlogpost", method="post")
+					div(class="form-group")
+						button(type="submit", class="btn btn-info", name="date", value="#{post.created}") Update post
 
 
-					form(action="api/deleteBlogpost", method="post")
-						div(class="form-group")
-							label(for="header") Header
-							input(class="form-control", type="text", name="header")
-						div(class="form-group")
-							button(type="submit", class="btn btn-danger") Remove post
+				form(action="api/deleteBlogpost", method="post")
+					div(class="form-group")
+						label(for="header") Header
+						input(class="form-control", type="text", name="header")
+					div(class="form-group")
+						button(type="submit", class="btn btn-danger") Remove post
 
 	if role === "admin"
 		div(class="container")

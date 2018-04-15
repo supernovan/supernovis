@@ -5,7 +5,7 @@ const postcontroller = require("../controllers/postcontroller.js")
 
 router.post("/login", usercontroller.login)
 
-router.post("/reg", usercontroller.reg)
+//router.post("/reg", usercontroller.reg)
 
 router.post("/createBlogpost", usercontroller.authWithRedirect, postcontroller.postblog)
 
