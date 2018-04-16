@@ -3,14 +3,17 @@ extends layouts/layout.pug
 block content
 	div(class="container")
 		div(class="page-header")
-			h2 Hopefully, there will be a lamp bellow this text.
+			h2 Hopefully, there will be a lamp below this text.
 		
 
 		canvas(id="c", width=350, height=280)
 		p(id="date")
+
+
 		form(id="form", onsubmit="updateColor(); return false")
-			input(id="hex", type="text", name="hex")
-			input(type="submit")
+			div(class="form-group")
+				input(id="hex", type="form-text", name="hex")
+			button(type="submit", class="btn btn-primary") Submit
 		p format: Hexcolor, so if you want "#ffffff" type "ffffff" without quotationmarks and press submit.
 		p Only hexcolors with 6 letters work at the moment.
 

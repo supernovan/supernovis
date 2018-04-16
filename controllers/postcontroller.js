@@ -61,5 +61,5 @@ exports.previousBlogposts = function (req, res) {
 	Post.find({}, function (err, results) {
 		if (err) { console.log(err); res.redirect("../views/blog");}
 		res.render("../views/blog", {blogposts : results})
-	}).sort("-postdate").limit(10)
+	}).sort("-created").limit(10)
 }

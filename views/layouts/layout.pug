@@ -22,20 +22,27 @@ html
 					div(class="navbar-nav mr-auto")
 						a(class="nav-item nav-link", href="/") Home
 						a(class="nav-item nav-link", href="/about") About
-						a(class="nav-item nav-link", href="/blog") Blog
+						div(class="navbar-item dropdown")
+							a(class="nav-link dropdown-toggle", href="#", id="navbardrop", data-toggle="dropdown", aria-haspopup="true", aria-expended="false") Blog
+							div(class="dropdown-menu", aria-labelledby="navbardrop")
+								a(class="dropdown-item", href="/blog") Latest posts
+								a(class="dropdown-item", href="/blog2018") Blog posts for 2018
+								a(class="dropdown-item", href="/blogcata") Blog catagories
 						div(class="navbar-item dropdown")
 							a(class="nav-link dropdown-toggle", href="#", id="navbardrop", data-toggle="dropdown", aria-haspopup="true", aria-expended="false") Projects
 							div(class="dropdown-menu", aria-labelledby="navbardrop")
 								a(class="dropdown-item", href="/projects/lamp") Lamp
 								a(class="dropdown-item", href="/projects/selfbalancingrobot") Self-balancing robot
 								a(class="dropdown-item", href="/projects/website") This website
-								a(class="dropdown-item", href="/projects/predictelection") predict the election in sweden 2018
+								a(class="dropdown-item", href="/projects/predictelection") Predict the election in sweden 2018
 					div(class="navbar-nav")
 						if role === "admin"
 							a(class="nav-item nav-link", href="/logout") Logout
 						else 
 							a(class="nav-item nav-link", href="/login") Login
 						//- a(class="nav-item nav-link", href="/register") Register
+						a(class="navbar-brand m1-md-auto", href="https://www.linkedin.com/in/majosefsson/")
+							img(src="../images/linkedin.png", width="30", height="30")
 						a(class="navbar-brand m1-md-auto", href="https://github.com/supernovan")
 							img(src="../images/github.png", width="30", height="30")
 						
