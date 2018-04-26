@@ -15,7 +15,7 @@ html
 	body(style="background-color:#F9FCF1;")
 		block nav
 			nav(class="navbar navbar-expand-md navbar-dark bg-dark navbar-fixed-top")
-				a(class="navbar-brand", href="#") Supernovis
+				a(class="navbar-brand", href="/home") Supernovis
 				button(class="navbar-toggler", type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expended="false", aria-label="Toggle navigation")
 					span(class="navbar-toggler-icon")
 				div(class="collapse navbar-collapse", id="navbarNav")
@@ -35,6 +35,7 @@ html
 								a(class="dropdown-item", href="/projects/selfbalancingrobot") Self-balancing robot
 								a(class="dropdown-item", href="/projects/website") This website
 								a(class="dropdown-item", href="/projects/predictelection") Predict the election in sweden 2018
+								a(class="dropdown-item", href="/projects/games") Games
 					div(class="navbar-nav")
 						if role === "admin"
 							a(class="nav-item nav-link", href="/logout") Logout

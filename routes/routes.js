@@ -15,6 +15,10 @@ router.get("/projects/lamp", usercontroller.authWithoutRedirect, function(req, r
 	res.render("lamp")
 })
 
+router.get("/projects/games", usercontroller.authWithoutRedirect,function(req, res) {
+	res.render("games")
+})
+
 router.get("/projects/selfbalancingrobot", usercontroller.authWithoutRedirect, function(req, res) {
 	res.render("selfbalancingrobot")
 })
