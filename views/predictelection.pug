@@ -4,7 +4,56 @@ block content
 	div(class="container")
 		div(class="page-header")
 			h1 Gonna predict the election in Sweden!
-		p Although I'll fail, horribly.
+		
+
+		if texts != undefined
+			each post in texts
+				
+				
+				p !{post.text}
+				
+
+				if role === "admin"
+
+					p ID #{post.textid}
+
+					form(action="api/updateText", method="post")
+
+						div(class="form-group")
+							label(for="id") ID
+							input(class="form-control", type="text", name="id")
+						
+						div(class="form-group")
+							label(for="text") Blog text
+							textarea(class="form-control", rows="8", name="text")
+
+						
+						div(class="form-group")
+							button(type="submit", class="btn btn-info", name="date", value="#{post.created}") Update post
+
+
+					form(action="api/deleteText", method="post")
+						div(class="form-group")
+							label(for="id") ID
+							input(class="form-control", type="text", name="id")
+						div(class="form-group")
+							button(type="submit", class="btn btn-danger") Remove post
+
+
+		if role === "admin"
+			div(class="container")
+				form(action="api/createText", method="post")
+					div(class="form-group")
+						label(for="header") Header
+						input(class="form-control", type="text", name="header")
+					div(class="form-group")
+						label(for="text") Blog text
+						textarea(class="form-control", rows="8", name="text")
+					div(class="form-group")
+						label(for="tag") tag
+						input(class="form-control" name="tag" type="text" placeholder="predictelection" value="predictelection")
+					div(class="form-group")
+						button(type="submit", class="btn btn-primary") Post blog post
 
 
 		
