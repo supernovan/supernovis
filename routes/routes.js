@@ -4,7 +4,7 @@ var postcontroller = require("../controllers/postcontroller.js")
 var textcontroller = require("../controllers/textcontroller.js")
 
 router.get("/", usercontroller.authWithoutRedirect, function(req, res) {
-	res.render("index")
+	res.redirect("/index")
 })
 
 router.get("/index", usercontroller.authWithoutRedirect, function(req, res) {
