@@ -9,7 +9,7 @@ router.post("/login", usercontroller.login)
 
 router.post("/createBlogpost", usercontroller.authWithRedirect, postcontroller.postblog)
 
-//router.post("/updateBlogpost", usercontroller.authWithRedirect, postcontroller.updateblog)
+router.post("/updateBlogpost", usercontroller.authWithRedirect, postcontroller.updateblog)
 
 router.post("/deleteBlogpost", usercontroller.authWithRedirect, postcontroller.deleteblog)
 

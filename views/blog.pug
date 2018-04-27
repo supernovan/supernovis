@@ -13,15 +13,28 @@ block content
 			p #{post.text}
 			p #{post.created}
 			if role === "admin"
+
+				p #{post.id}
+
 				form(action="api/updateBlogpost", method="post")
+
+					div(class="form-group")
+						label(for="id") ID
+						input(class="form-control", type="text", name="id")
+					
+					div(class="form-group")
+						label(for="text") Blog text
+						textarea(class="form-control", rows="8", name="text")
+
+					
 					div(class="form-group")
 						button(type="submit", class="btn btn-info", name="date", value="#{post.created}") Update post
 
 
 				form(action="api/deleteBlogpost", method="post")
 					div(class="form-group")
-						label(for="header") Header
-						input(class="form-control", type="text", name="header")
+						label(for="id") ID
+						input(class="form-control", type="text", name="id")
 					div(class="form-group")
 						button(type="submit", class="btn btn-danger") Remove post
 

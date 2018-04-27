@@ -1,17 +1,58 @@
 var Post = require("../models/postmodel")
+var Id = require("../models/idmodel")
 
-exports.postblog = function (req, res, next) {
+
+function retrieveCounter (callback) {
+	
+}
+
+
+exports.postblog = async (req, res, next) => {
 	if (req.body.header && req.body.text) {
-		var blogpost = {
+		
+		let counter = await Id.findOne({name : "autoinc"}, {upsert: true, setDefaultsOnInsert: true, new: true}, function (err, ele) {
+			if (err) {
+				return null
+			} else {
+				return ele
+			}
+		})
+
+		console.log(counter.blogid)
+		if (counter.blogid === undefined) {
+			var count = {
+				blogid: 1,
+				postid: 1,
+				name: "autoinc"
+			}
+			counter = await Id.create(count, {new: true}, function (err, ele) {
+				if (err) {
+					console.log("could not create it")
+					next(err)
+				} else {
+					console.log("counter is a thing now")
+					return ele
+				}
+			})
+		}
+
+		await console.log("counter" + counter + " : " + counter.blogid)
+
+		var blogpost = await {
 			//This should be fixed if I ever get more people that can blog
 			author: "Supernovan",
 			header: req.body.header,
 			text: req.body.text,
-			created: Date.now()
+			created: Date.now(),
+			id: counter.blogid++
 		}
+
+
+		
 		// console.log(blogpost.author + " : " + blogpost.header + " : " + blogpost.text + " : " + blogpost.created)
-		Post.create(blogpost, function (err, user) {
+		await Post.create(blogpost, function (err, user) {
 			if (err) {
+				console.log(blogpost)
 				console.log("it failed")
 				next(err)
 			} else {
@@ -21,6 +62,32 @@ exports.postblog = function (req, res, next) {
 		})
 	}
 }
+
+exports.updateblog = function (req, res, next) {
+	if (req.body.id && req.body.text) {
+		Post.findOne({"id" : req.body.id},function (err, post) {
+			if (err) {
+				console.log("could not find it")
+			} else {
+				p.updated = Date.now()
+				p.text = req.body.text
+				p.save(function(err) {
+					if (err) {
+						console.log("Could not save blogpost")
+					} else {
+						console.log("wehej")
+					}
+				})
+				res.redirect("/blog")
+			}
+		})
+	}	else {
+		console.log(req.body.id + " : " + req.body.text)
+		res.redirect("/blog")
+	}	// console.log(blogpost.author + " : " + blogpost.header + " : " + blogpost.text + " : " + blogpost.created)
+}
+
+
 
 /*exports.login = function (req, res, next) {
 	if (req.body.user && req.body.pass) {
@@ -50,7 +117,7 @@ exports.postblog = function (req, res, next) {
 }*/
 
 exports.deleteblog = function (req, res) {
-	Post.findOneAndRemove({ "header" : req.body.header }, function (err, results) {
+	Post.findOneAndRemove({ "id" : req.body.id }, function (err, results) {
 		if (err) { console.log(err); res.redirect("../blog");}
 		res.redirect("../blog")
 	})

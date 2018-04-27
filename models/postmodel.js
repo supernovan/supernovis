@@ -23,6 +23,10 @@ var PostSchema = new Schema({
 	uppdated: {
 		type: Date,
 
+	},
+	blogid: {
+		type: Number,
+		required: true
 	}
 
 })
