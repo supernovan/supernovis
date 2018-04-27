@@ -7,6 +7,10 @@ router.get("/", usercontroller.authWithoutRedirect, function(req, res) {
 	res.render("index")
 })
 
+router.get("/index", usercontroller.authWithoutRedirect, function(req, res) {
+	res.render("index")
+})
+
 router.get("/about", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
 router.get("/projects/lamp", usercontroller.authWithoutRedirect, textcontroller.textforpage)
