@@ -37,9 +37,9 @@ router.get("/login", usercontroller.authWithoutRedirect, function(req, res) {
 	res.render("login")
 })
 
-router.get("/register", usercontroller.authWithoutRedirect, function(req, res) {
-	res.render("register")
-})
+//router.get("/register", usercontroller.authWithoutRedirect, function(req, res) {
+//	res.render("register")
+//})
 
 router.get("/aiplayinggames", usercontroller.authWithoutRedirect, function(req, res) {
 	res.render("aiplayinggames")

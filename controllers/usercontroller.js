@@ -30,23 +30,23 @@ exports.login = function (req, res, next) {
 }
 
 //Might come back... someday
-/*exports.reg = function (req, res, next) {
-	if (req.body.user && req.body.pass) {
-		var admin = {
-			username: req.body.user,
-			password: req.body.pass 
-		}
+// exports.reg = function (req, res, next) {
+// 	if (req.body.user && req.body.pass) {
+// 		var admin = {
+// 			username: req.body.user,
+// 			password: req.body.pass 
+// 		}
 
-		User.create(admin, function (err, user) {
-			if (err) {
-				return next(err)
-			} else {
-				console.log("admin is born!")
-				res.redirect("/")
-			}
-		})
-	}
-}*/
+// 		User.create(admin, function (err, user) {
+// 			if (err) {
+// 				return next(err)
+// 			} else {
+// 				console.log("admin is born!")
+// 				res.redirect("/")
+// 			}
+// 		})
+// 	}
+// }
 
 exports.logout = function (req, res, next) {
 	req.session.destroy()

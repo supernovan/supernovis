@@ -10,7 +10,7 @@ function retrieveCounter (callback) {
 exports.postblog = async (req, res, next) => {
 	if (req.body.header && req.body.text) {
 		
-		let counter = await Id.findOne({name : "autoinc"}, {upsert: true, setDefaultsOnInsert: true, new: true}, function (err, ele) {
+		let counter = await Id.findOneAndUpdate({name : "autoinc"}, { $inc: {blogid: 1}}, function (err, ele) {
 			if (err) {
 				return null
 			} else {
@@ -18,8 +18,7 @@ exports.postblog = async (req, res, next) => {
 			}
 		})
 
-		console.log(counter.blogid)
-		if (counter.blogid === undefined) {
+		if (await counter === null) {
 			var count = {
 				blogid: 1,
 				postid: 1,
@@ -44,7 +43,7 @@ exports.postblog = async (req, res, next) => {
 			header: req.body.header,
 			text: req.body.text,
 			created: Date.now(),
-			id: counter.blogid++
+			blogid: Math.floor(counter.blogid/2) + 1
 		}
 
 
@@ -65,13 +64,13 @@ exports.postblog = async (req, res, next) => {
 
 exports.updateblog = function (req, res, next) {
 	if (req.body.id && req.body.text) {
-		Post.findOne({"id" : req.body.id},function (err, post) {
+		Post.findOne({"blogid" : req.body.id},function (err, post) {
 			if (err) {
 				console.log("could not find it")
 			} else {
-				p.updated = Date.now()
-				p.text = req.body.text
-				p.save(function(err) {
+				post.updated = Date.now()
+				post.text = req.body.text
+				post.save(function(err) {
 					if (err) {
 						console.log("Could not save blogpost")
 					} else {
@@ -117,7 +116,7 @@ exports.updateblog = function (req, res, next) {
 }*/
 
 exports.deleteblog = function (req, res) {
-	Post.findOneAndRemove({ "id" : req.body.id }, function (err, results) {
+	Post.findOneAndRemove({ "blogid" : req.body.id }, function (err, results) {
 		if (err) { console.log(err); res.redirect("../blog");}
 		res.redirect("../blog")
 	})
