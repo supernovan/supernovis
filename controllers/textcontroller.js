@@ -26,7 +26,7 @@ exports.createText = async (req, res, next) => {
 		}
 
 
-		
+		console.log(req.body.tag)
 		// console.log(blogpost.author + " : " + blogpost.header + " : " + blogpost.text + " : " + blogpost.created)
 		await Text.create(textpost, function (err, user) {
 			if (err) {
@@ -94,21 +94,24 @@ exports.updateText = function (req, res, next) {
 }*/
 
 exports.deleteText = function (req, res) {
-	Text.findOneAndRemove({ "postid" : req.body.id }, function (err, results) {
+	console.log("potatis")
+	Text.findOneAndRemove({ "textid" : req.body.id }, function (err, result) {
 		if (err) { console.log(err); res.redirect(req.url);}
-		res.redirect(req.url)
+		res.redirect("/")
 	})
 }
 
 
 exports.textforpage = function (req, res) {
-	Text.find({tag: req.originalUrl.substring(1)}, function (err, results) {
+	let str = req.originalUrl
+	if (str.split("/").length > 1) {
+		str = str.split("/")
+		str = str[str.length-1]
+	}
+
+	Text.find({tag: str}, function (err, results) {
 		if (err) { console.log(err); res.redirect(req.originalUrl);}
-		let str = req.originalUrl
-		if (str.split("/").length > 1) {
-			str = str.split("/")
-			str = str[str.length-1]
-		}
+		
 		console.log(str)
 		res.render(str, {texts : results})
 	}).sort("-textid").limit(10)
