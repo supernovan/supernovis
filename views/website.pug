@@ -1,16 +1,7 @@
 extends layouts/layout.pug
 
 block content
-	div(class="container")
-		div(class="page-header")
-			h2 Stuff to be implemented on the website
-
-		p Make a better web design.
-		p Blog is now working, but make it better.
-		p Play around with React/Angular?
-		p Add more cool projects
-
-
+	
 
 
 		if texts != undefined
@@ -32,7 +23,7 @@ block content
 						
 						div(class="form-group")
 							label(for="text") Blog text
-							textarea(class="form-control", rows="8", name="text")
+							textarea(class="form-control", rows="8", name="text") #{post.text}
 
 						
 						div(class="form-group")
