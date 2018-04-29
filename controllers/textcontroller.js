@@ -110,7 +110,7 @@ exports.textforpage = function (req, res) {
 	}
 
 	Text.find({tag: str}, function (err, results) {
-		if (err) { console.log(err); res.redirect(req.originalUrl);}
+		if (err) { console.log(err); res.redirect("/");}
 		
 		console.log(str)
 		res.render(str, {texts : results})
