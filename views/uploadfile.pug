@@ -1,0 +1,13 @@
+extends layouts/layout.pug
+
+block content
+	div(class="container")
+		div(class="page-header")
+			h1 upload file
+	if role === "admin"
+		form(action="api/uploadfile", method="post")
+			div(class="form-group")
+				label(for="file") image
+				input(class="form-control", type="file", name="file")
+			div(class="form-group")
+				button(type="submit", class="btn btn-primary") Upload file

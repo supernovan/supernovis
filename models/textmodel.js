@@ -10,8 +10,14 @@ var TextSchema = new Schema({
 		type: String,
 		required: true
 	},
-	id: {
-		type: Number
+	textid: {
+		type: Number,
+		required: true,
+		unique: true
+	},
+	tag: {
+		type: String,
+		required: true
 	}
 })
 

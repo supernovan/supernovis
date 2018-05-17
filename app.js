@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 const routes = require("./routes/routes.js")
 const apiroutes = require("./routes/apiroutes.js")
 app.use("/", routes)
-app.use("/api/", apiroutes)
+app.use("*/api/", apiroutes)
 
 //either production or development
 env = require("./config/env.js")
@@ -46,8 +46,7 @@ db.once("open", function (callback) {
 
 
 
-
-
+var io = require("socket.io").listen(server)
 
 
 

@@ -2,13 +2,51 @@ extends layouts/layout.pug
 
 block content
 	div(class="container")
-		div(class="page-header")
-			h1 About me
+		if texts != undefined
+			each post in texts
+				
+				
+				p !{post.text}
+				
 
-		p I'm hosting this website on a Raspberry-Pi 3.
-		p M.Sc. student in Engineering Mathematics
+				if role === "admin"
 
-		p When I'm not doing stupid stuff like this website, I might be playing games, socializing or maybe, just maybe I'm at the gym.
+					p ID #{post.textid}
+
+					form(action="api/updateText", method="post")
+
+						div(class="form-group")
+							label(for="id") ID
+							input(class="form-control", type="text", name="id")
+						
+						div(class="form-group")
+							label(for="text") Blog text
+							textarea(class="form-control", rows="8", name="text") #{post.text}
+
+						
+						div(class="form-group")
+							button(type="submit", class="btn btn-info", name="date", value="#{post.created}") Update post
 
 
-		
+					form(action="api/deleteText", method="post")
+						div(class="form-group")
+							label(for="id") ID
+							input(class="form-control", type="text", name="id")
+						div(class="form-group")
+							button(type="submit", class="btn btn-danger") Remove post
+
+
+		if role === "admin"
+			div(class="container")
+				form(action="api/createText", method="post")
+					div(class="form-group")
+						label(for="header") Header
+						input(class="form-control", type="text", name="header")
+					div(class="form-group")
+						label(for="text") Blog text
+						textarea(class="form-control", rows="8", name="text")
+					div(class="form-group")
+						label(for="tag") tag
+						input(class="form-control" name="tag" type="text" placeholder="about" value="about")
+					div(class="form-group")
+						button(type="submit", class="btn btn-primary") Post blog post

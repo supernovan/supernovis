@@ -1,37 +1,31 @@
 const router = require("express").Router()
 const usercontroller = require("../controllers/usercontroller.js")
 var postcontroller = require("../controllers/postcontroller.js")
-
+var textcontroller = require("../controllers/textcontroller.js")
 
 router.get("/", usercontroller.authWithoutRedirect, function(req, res) {
-	res.render("index")
+	res.redirect("/index")
 })
 
-router.get("/about", usercontroller.authWithoutRedirect, function(req, res) {
-	res.render("about")
-})
+router.get("/index", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
-router.get("/projects/lamp", usercontroller.authWithoutRedirect, function(req, res) {
-	res.render("lamp")
-})
+router.get("/about", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
-router.get("/projects/games", usercontroller.authWithoutRedirect,function(req, res) {
-	res.render("games")
-})
+router.get("/projects/lamp", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
-router.get("/projects/selfbalancingrobot", usercontroller.authWithoutRedirect, function(req, res) {
-	res.render("selfbalancingrobot")
-})
+router.get("/projects/games", usercontroller.authWithoutRedirect,textcontroller.textforpage)
 
-router.get("/projects/website", usercontroller.authWithoutRedirect, function(req, res) {
-	res.render("website")
-})
+router.get("/projects/selfbalancingrobot", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
-router.get("/projects/predictelection", usercontroller.authWithoutRedirect, function(req, res) {
-	res.render("predictelection")
-})
+router.get("/projects/website", usercontroller.authWithoutRedirect, textcontroller.textforpage)
+
+router.get("/projects/predictelection", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
 router.get("/blog", usercontroller.authWithoutRedirect, postcontroller.previousBlogposts)
+
+router.get("/uploadfile", usercontroller.authWithRedirect, function (req, res) {
+	res.render("uploadfile")
+})
 
 router.get("/login", usercontroller.authWithoutRedirect, function(req, res) {
 	res.render("login")
@@ -41,13 +35,11 @@ router.get("/login", usercontroller.authWithoutRedirect, function(req, res) {
 //	res.render("register")
 //})
 
-router.get("/aiplayinggames", usercontroller.authWithoutRedirect, function(req, res) {
-	res.render("aiplayinggames")
-})
+router.get("/aiplayinggames", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
-router.get("/logs", usercontroller.authWithoutRedirect, function(req, res) {
+/*router.get("/logs", usercontroller.authWithoutRedirect, function(req, res) {
 	res.render("logs")
-})
+})*/
 
 router.get("/logout",usercontroller.logout ,function(req, res) {
 	res.render("index")
