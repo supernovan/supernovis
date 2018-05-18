@@ -12,7 +12,7 @@ exports.login = function (req, res, next) {
 				console.log("oh no")
 				res.redirect("/login")
 			}
-			if (user.password != undefined) {
+			if (user != null) {
 				bcrypt.compare(req.body.pass, user.password, function (err, valid) {
 				if (err) { return next(err) }
 				if (!valid) {
@@ -25,7 +25,7 @@ exports.login = function (req, res, next) {
 				}
 				})
 			} else {
-				res.redirect("/login")
+				//res.redirect("/login")
 			}
 		})
 	}
