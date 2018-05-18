@@ -52,16 +52,17 @@ html
 					
 
 		span(class="border-bottom border-secondary")
-			div(class="row" style="border-bottom: 4px solid;  border-bottom-color: #DFE3EE;")
-				img(src="../images/header2.jpg", class="img-fluid" style="min-width: 100%; height: auto; max-height: 180px;")
+			div(class="container-fluid")
+				div(class="row" style="border-bottom: 4px solid;  border-bottom-color: #DFE3EE;")
+					img(src="../images/header2.jpg", class="img-fluid" style="min-width: 100%; height: auto; max-height: 180px;")
 
 		// div(class="row", style="background: linear-gradient(to bottom, #77a3ea, #F7F7F7); height: 43px;")
-		div(class="row", style="background-color: F7F7F7;")
-
-			div(class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-2")
-				div(class="card bg-light border-0 mb-3")
-					div(class="card-body", style="background-color: #F7F7F7;")
-						img(class="card-img-top", src="../images/logo2.jpg")
+		div(class="container-fluid")
+			div(class="row", style="background-color: F7F7F7;")
+				div(class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-2")
+					div(class="card bg-light border-0 mb-3")
+						div(class="card-body", style="background-color: #F7F7F7;")
+							img(class="card-img-top", src="../images/logo2.jpg")
 						p Welcome to Supernovis, my name is Mattias Josefsson. I am an engineering student in engineering mathematics at Lund university, Sweden. I program on my spare time fun/weird projects.
-			div(class="col-sm-7 col-md-8 col-lg-9 col-xl-10", style="background-color: F7F7F7;")
-				block content
+				div(class="col-sm-7 col-md-8 col-lg-9 col-xl-10", style="background-color: F7F7F7;")
+					block content
