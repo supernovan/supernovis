@@ -12,8 +12,8 @@ exports.login = function (req, res, next) {
 				console.log("oh no")
 				res.redirect("/login")
 			}
-
-			bcrypt.compare(req.body.pass, user.password, function (err, valid) {
+			if (user.password != undefined) {
+				bcrypt.compare(req.body.pass, user.password, function (err, valid) {
 				if (err) { return next(err) }
 				if (!valid) {
 					res.redirect("/login")
@@ -23,8 +23,10 @@ exports.login = function (req, res, next) {
 					req.session.admin = true
 					res.redirect("/")
 				}
-			})
-
+				})
+			} else {
+				res.redirect("/login")
+			}
 		})
 	}
 }
