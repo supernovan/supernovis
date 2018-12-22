@@ -11,6 +11,22 @@ router.get("/index", usercontroller.authWithoutRedirect, textcontroller.textforp
 
 router.get("/about", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
+router.get("/calender", usercontroller.authWithoutRedirect, function(req, res) {
+	res.render("calendar")
+})
+
+function checkWildcard(req, res, next) {
+	correctUrl = ["1337", "98279"]
+	console.log(req.path)
+	if (correctUrl.includes(req.params.id)) {
+		res.render(req.params.id)
+	} else {
+		res.render("index")
+	}
+}
+
+router.get("/gift/:id", usercontroller.authWithoutRedirect, checkWildcard)
+
 router.get("/projects/lamp", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
 router.get("/projects/games", usercontroller.authWithoutRedirect,textcontroller.textforpage)

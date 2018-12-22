@@ -1,0 +1,52 @@
+extends layouts/layout.pug
+
+block content
+	div(class="container")
+		if texts != undefined
+			each post in texts
+				
+				
+				p !{post.text}
+				
+
+				if role === "admin"
+
+					p ID #{post.textid}
+
+					form(action="api/updateText", method="post")
+
+						div(class="form-group")
+							label(for="id") ID
+							input(class="form-control", type="text", name="id")
+						
+						div(class="form-group")
+							label(for="text") Blog text
+							textarea(class="form-control", rows="8", name="text") #{post.text}
+ 
+						
+						div(class="form-group")
+							button(type="submit", class="btn btn-info", name="date") Update post
+
+
+					form(action="api/deleteText", method="post")
+						div(class="form-group")
+							label(for="id") ID
+							input(class="form-control", type="text", name="id")
+						div(class="form-group")
+							button(type="submit", class="btn btn-danger") Remove post
+
+
+		if role === "admin"
+			div(class="container")
+				form(action="api/createText", method="post")
+					div(class="form-group")
+						label(for="header") Header
+						input(class="form-control", type="text", name="header")
+					div(class="form-group")
+						label(for="text") Blog text
+						textarea(class="form-control", rows="8", name="text")
+					div(class="form-group")
+						label(for="tag") tag
+						input(class="form-control" name="tag" type="text" placeholder="index" value="index")
+					div(class="form-group")
+						button(type="submit", class="btn btn-primary") Post blog post
