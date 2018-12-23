@@ -19,13 +19,14 @@ function checkWildcard(req, res, next) {
 	correctUrl = ["28", "4599", "intro", "56"]
 	console.log(req.path)
 	if (correctUrl.includes(req.params.id)) {
-		next()
+	
 	} else {
-		res.render("index")
+		req.url = "index"	
 	}
+	next()
 }
 
-router.get("/gift/:id", usercontroller.authWithoutRedirect, checkWildcard, textcontroller.textforpag)
+router.get("/gift/:id", usercontroller.authWithoutRedirect, checkWildcard, textcontroller.textforpage)
 
 router.get("/projects/lamp", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
