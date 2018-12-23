@@ -16,7 +16,7 @@ router.get("/calender", usercontroller.authWithoutRedirect, function(req, res) {
 })
 
 function checkWildcard(req, res, next) {
-	correctUrl = ["28", "4599", "intro", "56"]
+	correctUrl = ["2", "28", "4599", "intro", "56"]
 	console.log(req.path)
 	if (correctUrl.includes(req.params.id)) {
 	
