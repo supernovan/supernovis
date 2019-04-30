@@ -84,9 +84,16 @@ io.on("connection", function (socket) {
 			console.log(str);
 			if (color.length == 6 && newtime.getTime() / 1000 -5 > time.getTime() / 1000) {
 				time = newtime
-				client.write("#" + str + "\n")
+				//client.write("#" + str + "\n")
 				camera.start()
 			}
+	
+		})
+
+		socket.on("newPicture", function (data) {
+			const newtime = new Date();
+	
+			camera.start()
 	
 		})
 	})
@@ -98,10 +105,12 @@ if (env == "prod") {
 	var RaspiCam = require("raspicam")
 	var fs = require("fs")
 	
+	let counter = 1
+
 	var client = new net.Socket()
 	var camera = new RaspiCam({
 		mode: "photo", 
-		output: "temp.jpg"
+		output: "../public/images/plant/temp" + counter + ".jpg"
 	})
 	
 	function base64_encode(file) {
@@ -112,24 +121,25 @@ if (env == "prod") {
 	let img = new Buffer(base64_encode("temp.jpg"), "base64")
 	
 	camera.on("start", function() {
+		counter += 1
 	})
 	
 	camera.on("read", function(err, timestamp, filename) {
 		var base64str = base64_encode(filename)
 		img = new Buffer(base64str, "base64")
 		io.emit("frame", img.toString("base64"))
-		io.emit("time", time)
+		//io.emit("time", time)
 		//console.log(img)
 	})
 
-	client.connect(1337, "192.168.1.184", function() {
-	console.log("connected to lamp")
-	})
+	//client.connect(1337, "192.168.1.184", function() {
+	//console.log("connected to lamp")
+	//})
 
-	client.on("data", function(data) {
-		var str = data.toString()
-		camera.start()
-	})
+	//client.on("data", function(data) {
+	//	var str = data.toString()
+	//	camera.start()
+	//})
 	
 	
 	
