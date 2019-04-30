@@ -93,11 +93,10 @@ io.on("connection", function (socket) {
 		socket.on("newPicture", function (data) {
 			const newtime = new Date();
 	
-			camera.start()
+			//camera.start()
 	
 		})
 	})
-
 
 //This is just connections for the productionserver and other things 
 if (env == "prod") {
@@ -131,6 +130,11 @@ if (env == "prod") {
 		counter += 1
 		//io.emit("time", time)
 		//console.log(img)
+	})
+	
+	var CronJob = require("cron").CronJob
+	new CronJob('0 /15 18-24 * * *', function() {
+		camera.start()
 	})
 
 	//client.connect(1337, "192.168.1.184", function() {
