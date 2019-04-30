@@ -31,6 +31,8 @@ router.get("/gift/:id", usercontroller.authWithoutRedirect, checkWildcard, textc
 
 router.get("/projects/lamp", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
+router.get("/projects/plants", usercontroller.authWithoutRedirect, textcontroller.textforpage)
+
 router.get("/projects/games", usercontroller.authWithoutRedirect,textcontroller.textforpage)
 
 router.get("/projects/selfbalancingrobot", usercontroller.authWithoutRedirect, textcontroller.textforpage)
