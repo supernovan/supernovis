@@ -2,7 +2,7 @@ const router = require("express").Router()
 const usercontroller = require("../controllers/usercontroller.js")
 const postcontroller = require("../controllers/postcontroller.js")
 const textcontroller = require("../controllers/textcontroller.js")
-
+const trellocontroller = require("../controllers/trellocontroller.js")
 
 router.post("/login", usercontroller.login)
 
@@ -20,5 +20,10 @@ router.post("/updateText", usercontroller.authWithRedirect, textcontroller.updat
 
 router.post("/deleteText", usercontroller.authWithRedirect, textcontroller.deleteText)
 
+router.post("/createTable", usercontroller.authJWT, trellocontroller.createTable)
+
+router.post("/deleteTable", usercontroller.authJWT, trellocontroller.deleteTable)
+
+router.get("/getTables", trellocontroller.getTable)
 
 module.exports = router

@@ -1,7 +1,8 @@
 const router = require("express").Router()
 const usercontroller = require("../controllers/usercontroller.js")
-var postcontroller = require("../controllers/postcontroller.js")
-var textcontroller = require("../controllers/textcontroller.js")
+const postcontroller = require("../controllers/postcontroller.js")
+const textcontroller = require("../controllers/textcontroller.js")
+const trellocontroller = require("../controllers/trellocontroller.js")
 
 router.get("/", usercontroller.authWithoutRedirect, function(req, res) {
 	res.redirect("/index")
@@ -47,6 +48,8 @@ router.get("/uploadfile", usercontroller.authWithRedirect, function (req, res) {
 router.get("/login", usercontroller.authWithoutRedirect, function(req, res) {
 	res.render("login")
 })
+
+router.get("/trello", usercontroller.authWithoutRedirect, trellocontroller.tablesForPage)
 
 //router.get("/register", usercontroller.authWithoutRedirect, function(req, res) {
 //	res.render("register")
