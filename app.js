@@ -110,7 +110,7 @@ if (env == "prod") {
 	var client = new net.Socket()
 	var camera = new RaspiCam({
 		mode: "photo", 
-		output: "../public/images/plant/temp" + counter + ".jpg"
+		output: "./public/images/plants/temp" + counter + ".jpg"
 	})
 	
 	function base64_encode(file) {
@@ -121,13 +121,14 @@ if (env == "prod") {
 	let img = new Buffer(base64_encode("temp.jpg"), "base64")
 	
 	camera.on("start", function() {
-		counter += 1
+
 	})
 	
 	camera.on("read", function(err, timestamp, filename) {
-		var base64str = base64_encode(filename)
+		var base64str = base64_encode("./public/images/plants/" + filename)
 		img = new Buffer(base64str, "base64")
 		io.emit("frame", img.toString("base64"))
+		counter += 1
 		//io.emit("time", time)
 		//console.log(img)
 	})
