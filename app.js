@@ -107,7 +107,7 @@ if (env == "prod") {
 
 	const { spawn } = require('child_process');
 
-	spawn('ls | grep "to" |  grep -o -E '[0-9]+' | sort -n', (error, stdout, stderr) => {
+	spawn(`ls | grep "to" |  grep -o -E '[0-9]+' | sort -n`, (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return;
@@ -138,7 +138,7 @@ if (env == "prod") {
 	})
 
 	var CronJob = require("cron").CronJob
-	new CronJob('0 /2 17-24 * * *', function() {
+	const job = new CronJob('0 */2 17-24 * * *', function() {
 		var filePath = `./public/images/plants/plant-${counter}.jpg`
 		const photo = spawn('raspistill', ['-vf', '-hf', '-o', filePath])
 
@@ -152,7 +152,7 @@ if (env == "prod") {
 
 	})
 
-	CronJob.start()
+	job.start()
 
 	//client.connect(1337, "192.168.1.184", function() {
 	//console.log("connected to lamp")
