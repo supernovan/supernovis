@@ -85,7 +85,7 @@ io.on("connection", function (socket) {
 			if (color.length == 6 && newtime.getTime() / 1000 -5 > time.getTime() / 1000) {
 				time = newtime
 				//client.write("#" + str + "\n")
-				camera.start()
+				//camera.start()
 			}
 	
 		})
@@ -101,17 +101,25 @@ io.on("connection", function (socket) {
 //This is just connections for the productionserver and other things 
 if (env == "prod") {
 	var net = require("net")
-	var RaspiCam = require("raspicam")
 	var fs = require("fs")
 	
 	let counter = 1
 
-	var client = new net.Socket()
-	var camera = new RaspiCam({
-		mode: "photo", 
-		output: "./public/images/plants/temp" + counter + ".jpg"
-	})
-	
+	const { spawn } = require('child_process');
+
+	spawn('ls | grep "to" |  grep -o -E '[0-9]+' | sort -n', (error, stdout, stderr) => {
+		if (error) {
+			console.error(`exec error: ${error}`);
+			return;
+		}
+	  	if (stdout != null) {
+			console.log(`stdout: ${stdout}`);
+			counter = stdout
+	  	}
+	  	console.log(`stderr: ${stderr}`);
+	});
+
+	//ls | grep "to" |  grep -o -E '[0-9]+' | sort -n
 	function base64_encode(file) {
 		var bitmap = fs.readFileSync(file)
 		return new Buffer(bitmap).toString("base64")
@@ -119,9 +127,6 @@ if (env == "prod") {
 	
 	let img = new Buffer(base64_encode("temp.jpg"), "base64")
 	
-	camera.on("start", function() {
-
-	})
 	
 	camera.on("read", function(err, timestamp, filename) {
 		var base64str = base64_encode("./public/images/plants/" + filename)
@@ -131,11 +136,23 @@ if (env == "prod") {
 		//io.emit("time", time)
 		//console.log(img)
 	})
-	
+
 	var CronJob = require("cron").CronJob
-	new CronJob('0 /15 18-24 * * *', function() {
-		camera.start()
+	new CronJob('0 /2 17-24 * * *', function() {
+		var filePath = `./public/images/plants/plant-${counter}.jpg`
+		const photo = spawn('raspistill', ['-vf', '-hf', '-o', filePath])
+
+		photo.on('close', (code) => {
+	  		console.log(`Took picture`);
+	  		var base64str = base64_encode(filePath)
+	  		img = new Buffer(base64str, "base64")
+			io.emit("frame", img.toString("base64"))
+			counter += 1
+		});
+
 	})
+
+	CronJob.start()
 
 	//client.connect(1337, "192.168.1.184", function() {
 	//console.log("connected to lamp")
