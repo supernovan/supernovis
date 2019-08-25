@@ -4,7 +4,7 @@ const postcontroller = require("../controllers/postcontroller.js")
 const textcontroller = require("../controllers/textcontroller.js")
 const trellocontroller = require("../controllers/trellocontroller.js")
 
-router.get("/", usercontroller.authWithoutRedirect, function(req, res) {
+router.get("/",  function(req, res) {
 	res.redirect("/index")
 })
 
@@ -43,9 +43,9 @@ router.get("/projects/predictelection", usercontroller.authWithoutRedirect, text
 
 router.get("/blog", usercontroller.authWithoutRedirect, postcontroller.previousBlogposts)
 
-router.get("/uploadfile", usercontroller.authWithRedirect, function (req, res) {
-	res.render("uploadfile")
-})
+// router.get("/uploadfile", usercontroller.authWithRedirect, function (req, res) {
+// 	res.render("uploadfile")
+// })
 
 router.get("/login", usercontroller.authWithoutRedirect, function(req, res) {
 	res.render("login")
@@ -53,9 +53,9 @@ router.get("/login", usercontroller.authWithoutRedirect, function(req, res) {
 
 router.get("/trello", usercontroller.authWithoutRedirect, trellocontroller.tablesForPage)
 
-//router.get("/register", usercontroller.authWithoutRedirect, function(req, res) {
-//	res.render("register")
-//})
+router.get("/register", usercontroller.authWithoutRedirect, function(req, res) {
+	res.render("register")
+})
 
 router.get("/aiplayinggames", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 

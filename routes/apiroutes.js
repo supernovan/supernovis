@@ -6,7 +6,7 @@ const trellocontroller = require("../controllers/trellocontroller.js")
 
 router.post("/login", usercontroller.login)
 
-//router.post("/reg", usercontroller.reg)
+// router.post("/reg", usercontroller.reg)
 
 router.post("/createBlogpost", usercontroller.authWithRedirect, postcontroller.postblog)
 

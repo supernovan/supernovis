@@ -3,57 +3,90 @@ var bcrypt = require('bcrypt')
 //var router = express.Router()
 var jwt = require("jsonwebtoken")
 var secret = require("../config/jwtsecret.js")
+const db = require('../db/dbbridge')
 
 exports.login = function (req, res, next) {
 	if (req.body.user && req.body.pass) {
-		User.findOne({"username" : req.body.user})
-		.select("password").select("username")
-		.exec(function (err, user) {
-			if (err) { return next(err) }
-			if (!user) {
-				console.log("oh no")
-				res.redirect("/login")
-			}
-			if (user != null) {
-				bcrypt.compare(req.body.pass, user.password, function (err, valid) {
-					if (err) { return next(err) }
-					if (!valid) {
-						res.redirect("/login")
-					} else {
-						console.log("Yay")
-						req.session.user = "majos002"
-						req.session.admin = true
-						console.log(secret)
-						var token = jwt.sign({user: "majos002"}, secret, {
-							expiresIn: 86400*7
-						})
-						res.cookie("jwt", token)
-						res.redirect("/")
-					}
-				})
-			} else {
-				//res.redirect("/login")
-			}
-		})
-	}
+
+        console.log(req.body.user + " : ")
+        db.query('SELECT * from users where username=$1', [req.body.user], (err, result) => {
+            if (err) {
+                return next(err)
+            }
+
+            const pass = result.rows[0].password
+            console.log(result)
+            console.log(pass + " THIS")
+            bcrypt.compare(req.body.pass, pass, function (err, valid) {
+                if (err) next(err)
+                else if (!valid) {
+                    console.log("invalid login credentials")
+                    res.redirect("/login")
+                }
+                else {
+                    console.log("Yay")
+                    req.session.user = "majos002"
+                    req.session.admin = true
+                    console.log(secret)
+                    var token = jwt.sign({user: "majos002"}, secret, {
+                        expiresIn: 86400*7
+                    })
+                    res.cookie("jwt", token)
+                    res.redirect("/")
+                }
+            })
+        })
+    }
+
+
+		// User.findOne({"username" : req.body.user})
+		// .select("password").select("username")
+		// .exec(function (err, user) {
+		// 	if (err) { return next(err) }
+		// 	if (!user) {
+		// 		console.log("oh no")
+		// 		res.redirect("/login")
+		// 	}
+		// 	if (user != null) {
+		// 		bcrypt.compare(req.body.pass, user.password, function (err, valid) {
+		// 			if (err) { return next(err) }
+		// 			if (!valid) {
+		// 				res.redirect("/login")
+		// 			} else {
+		// 				console.log("Yay")
+		// 				req.session.user = "majos002"
+		// 				req.session.admin = true
+		// 				console.log(secret)
+		// 				var token = jwt.sign({user: "majos002"}, secret, {
+		// 					expiresIn: 86400*7
+		// 				})
+		// 				res.cookie("jwt", token)
+		// 				res.redirect("/")
+		// 			}
+		// 		})
+		// 	} else {
+		// 		//res.redirect("/login")
+		// 	}
+		// })
 }
 
-//Might come back... someday
+//register function... could probably be better
 // exports.reg = function (req, res, next) {
 // 	if (req.body.user && req.body.pass) {
-// 		var admin = {
-// 			username: req.body.user,
-// 			password: req.body.pass 
-// 		}
-
-// 		User.create(admin, function (err, user) {
-// 			if (err) {
-// 				return next(err)
-// 			} else {
-// 				console.log("admin is born!")
-// 				res.redirect("/")
-// 			}
-// 		})
+//
+//         bcrypt.hash(req.body.pass, 10, function (err, hash) {
+//             if (err) {
+//                 return next(err)
+//             } else {
+//                 db.query('INSERT into users values ($1, $2)', [req.body.user, hash], (err, result) => {
+//                     if (err) {
+//                         return next(err)
+//                     }
+//                     console.log("admin is born!")
+//                     res.redirect("/")
+//                 })
+//             }
+//         })
 // 	}
 // }
 

@@ -5,6 +5,10 @@ var app = express()
 var secret = require("./config/secret.js")
 var session = require('express-session');
 
+
+
+
+
 console.log(secret)
 app.use(session({
 	secret: secret,
@@ -33,18 +37,8 @@ env = require("./config/env.js")
 
 //trello
 const trelloCtrl = require("./controllers/trellocontroller.js")
-//Database
-var mongoose = require("mongoose")
-var mongoDB = 'mongodb://localhost:27017/supernovis'
-mongoose.connect(mongoDB)
-mongoose.Promise = global.Promise
 
-var db = mongoose.connection
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
-db.once("open", function (callback) {
-	console.log("connection successful")
-})
 
 
 
