@@ -7,33 +7,8 @@ block content
 
     div(id="chartContainer")
 
-    <script>
-    let rows = "{{ rows }}";
-    console.log(rows);
-    var dps = [];
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
-    title:{
-        text: "CO2 at my Arduino and Raspberry Pi"
-    },
-    axisX:{
-        title: "timeline",
-        gridThickness: 2
-    },
-    axisY: {
-        title: "CO2 PPM"
-    },
-    data: [
-    {
-        type: "scatter",
-        dataPoints: rows
-    }
-    ]
-    });
-
-    chart.render();
-
-    </script>
+    script
+        include ../public/javascript/co2.js
 
 
 
