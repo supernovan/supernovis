@@ -5,6 +5,6 @@ exports.co2All = function (req, res, next) {
         if (err) {
             return next(err)
         }
-        res.render(req.originalUrl, {rows : result})
+        res.render(req.originalUrl.replace("/", ""), {rows : result})
     })
 }
