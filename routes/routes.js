@@ -3,6 +3,7 @@ const usercontroller = require("../controllers/usercontroller.js")
 const postcontroller = require("../controllers/postcontroller.js")
 const textcontroller = require("../controllers/textcontroller.js")
 const trellocontroller = require("../controllers/trellocontroller.js")
+const co2controller = require("../controllers/co2controller")
 
 router.get("/",  function(req, res) {
 	res.redirect("/index")
@@ -42,6 +43,8 @@ router.get("/projects/website", usercontroller.authWithoutRedirect, textcontroll
 router.get("/projects/predictelection", usercontroller.authWithoutRedirect, textcontroller.textforpage)
 
 router.get("/blog", usercontroller.authWithoutRedirect, postcontroller.previousBlogposts)
+
+router.get("/co2", usercontroller.authWithRedirect, co2controller.co2All)
 
 // router.get("/uploadfile", usercontroller.authWithRedirect, function (req, res) {
 // 	res.render("uploadfile")
