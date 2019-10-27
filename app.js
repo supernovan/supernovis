@@ -40,7 +40,7 @@ const trelloCtrl = require("./controllers/trellocontroller.js")
 
 
 
-const text = 'INSERT INTO co2(name, date) VALUES($1, $2) RETURNING *'
+const text = 'INSERT INTO co2(ppm, current) VALUES($1, $2) RETURNING *'
 const SerialPort = require('serialport')
 const port = new SerialPort('/dev/ttyUSB0')
 
@@ -62,8 +62,8 @@ port.on('data', function (data) {
 			console.log("Bad reading")
 		} else {
 			console.log("Data:", ppm)
-			if (counter % 100 == 0) {
-				db.query(text, [ppm, Date.now()], (err, res) => {
+			if (counter % 200 == 0) {
+				db.query(text, [ppm, new Date()], (err, res) => {
 					if (err) {
 						console.log(err.stack)
 					} else {
@@ -131,7 +131,7 @@ io.on("connection", function (socket) {
 	})
 
 //This is just connections for the productionserver and other things 
-if (env == "prod") {
+if (env == "prod1234") {
 	var net = require("net")
 	var fs = require("fs")
 	
