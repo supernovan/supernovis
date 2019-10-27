@@ -11,9 +11,6 @@ block content
     let rows = "{{ rows }}";
     console.log(rows);
     var dps = [];
-    for(var element in myObject) {
-        dps.push({label: element, y: myObject[element]});
-    }
     var chart = new CanvasJS.Chart("chartContainer",
     {
     title:{
