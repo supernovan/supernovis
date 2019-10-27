@@ -4,7 +4,7 @@ var app = express()
 // For authentication, only for admin.
 var secret = require("./config/secret.js")
 var session = require('express-session');
-
+const db = require('./db/dbbridge')
 
 
 
@@ -37,6 +37,44 @@ env = require("./config/env.js")
 
 //trello
 const trelloCtrl = require("./controllers/trellocontroller.js")
+
+
+
+const text = 'INSERT INTO co2(name, date) VALUES($1, $2) RETURNING *'
+const SerialPort = require('serialport')
+const port = new SerialPort('/dev/ttyUSB0')
+
+
+port.on('readable', function () {
+	console.log('Data1:', port.read())
+})
+
+let counter = 0
+// Switches the port into "flowing mode"
+port.on('data', function (data) {
+	counter += 1
+	//console.log('Data2:', data.toString('utf8').replace("\n", ""))
+	let spl = data.toString('utf8').replace("\n", "").split(" = ")
+	if (spl.length == 2) {
+		let ppm = spl[1]
+		ppm = parseFloat(ppm)
+		if (ppm < 20 || ppm > 4000) {
+			console.log("Bad reading")
+		} else {
+			console.log("Data:", ppm)
+			if (counter % 100 == 0) {
+				db.query(text, [ppm, Date.now()], (err, res) => {
+					if (err) {
+						console.log(err.stack)
+					} else {
+						console.log(res.rows[0])
+						// { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
+					}
+				})
+			}
+		}
+	}
+})
 
 
 
