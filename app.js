@@ -59,7 +59,7 @@ port.on('data', function (data) {
 		let ppm = spl[1]
 		ppm = parseFloat(ppm)
 		if (ppm < 20 || ppm > 4000) {
-			console.log("Bad reading")
+			console.log("Bad reading " + spl)
 		} else {
 			console.log("Data:", ppm)
 			if (counter % 200 == 0) {
