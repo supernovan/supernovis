@@ -44,7 +44,7 @@ router.get("/projects/predictelection", usercontroller.authWithoutRedirect, text
 
 router.get("/blog", usercontroller.authWithoutRedirect, postcontroller.previousBlogposts)
 
-router.get("/co2", usercontroller.authWithRedirect, co2controller.co2All)
+router.get("/co2", co2controller.co2All)
 
 // router.get("/uploadfile", usercontroller.authWithRedirect, function (req, res) {
 // 	res.render("uploadfile")
