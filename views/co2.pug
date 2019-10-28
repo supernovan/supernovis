@@ -7,8 +7,9 @@ block content
 
     div(id="chartContainer")
 
+    script.
+        var rows = !{JSON.stringify(rows)};
+    script(src="https://canvasjs.com/assets/script/canvasjs.min.js")
     script
         include ../public/javascript/co2.js
-
-
 
