@@ -40,7 +40,7 @@ const trelloCtrl = require("./controllers/trellocontroller.js")
 
 
 
-const text = 'INSERT INTO co2(ppm, current) VALUES($1, $2) RETURNING *'
+const text = 'INSERT INTO co2(ppm, current, lux) VALUES($1, $2, $3) RETURNING *'
 const SerialPort = require('serialport')
 const port = new SerialPort('/dev/ttyUSB1')
 
@@ -59,17 +59,18 @@ lightPort.on('data', function (data) {
 		let spl = data.toString('utf8').split("\n")
 		let temp = spl[0].split(": ")[1]
 		if (temp) {
-			lux = temp
+		//	console.log("datal " + temp)
+			lux = temp.replace("\r", "")
 		}
 	}
 	catch (e) {
 		console.log(e)
 	}
-}
+})
 
 
 port.on('readable', function () {
-	console.log('Data1:', port.read())
+	port.read()
 })
 
 let counter = 0
@@ -85,8 +86,8 @@ port.on('data', function (data) {
 			console.log("Bad reading " + spl)
 			counter--
 		} else {
-			console.log("Data:", ppm)
-			if (counter % 200 == 0 && lux != 0.0) {
+			//console.log("Data:", ppm)
+			if (counter % 5 == 0 && lux != 0.0) {
 				db.query(text, [ppm, new Date(), lux], (err, res) => {
 					if (err) {
 						console.log(err.stack)
