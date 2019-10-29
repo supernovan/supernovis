@@ -87,7 +87,7 @@ port.on('data', function (data) {
 			counter--
 		} else {
 			//console.log("Data:", ppm)
-			if (counter % 5 == 0 && lux != 0.0) {
+			if (counter % 5 == 0 && lux >= 0.0) {
 				db.query(text, [ppm, new Date(), lux], (err, res) => {
 					if (err) {
 						console.log(err.stack)
